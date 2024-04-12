@@ -2,8 +2,10 @@ import math
 import random
 
 def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
-    if (not type(toast_duration) is int) or not (1 <= toast_duration <= 100):
+    if (not type(toast_duration) is int):
         raise ValueError("toast_duration is not an integer")
+    if not (1 <= toast_duration <= 100):
+        raise ValueError("toast_duration is not in the valid range")
     if (not type(wait_duration) is int) or not (1 <= wait_duration <= 100):
         raise ValueError("wait_duration is not an integer")
     if (not type(toaster) is int) or not (1 <= toaster <= 10):
@@ -37,7 +39,10 @@ def find_maximum(toast_duration, wait_duration, power):
         wait_duration_next = wait_duration + learning_rate * wait_duration_gradient
         power_next = power + learning_rate_power * power_gradient
 
-        if  abs(utility(int(toast_duration_next), int(wait_duration_next), power_next) - utility(toast_duration, wait_duration, power)) < 1e-6:
+        if not 0 < int(toast_duration_next) <= 100 or not 0 < int(wait_duration_next) <= 100 or not 0 < power_next < 2:
+            break
+
+        if abs(utility(int(toast_duration_next), int(wait_duration_next), power_next) - utility(int(toast_duration), int(wait_duration), power)) < 1e-6:
             break
 
         # reassigning values for next run
