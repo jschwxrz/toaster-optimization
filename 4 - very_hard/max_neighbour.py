@@ -77,5 +77,5 @@ for num in cleaned_optimums:
 print("All optimums:")
 print(sorted_dict)
 
-print("All optimums when taking into account a small error:")
+print("All optimums when taking into account a small error of 3:")
 print(filtered_arr)
