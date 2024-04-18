@@ -25,8 +25,7 @@ def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
     return overall_utility
 
 def find_maximum():
-    iteration = 0
-    current_parameters = (random.randint(1,100), random.randint(1,100), random.uniform(0.0,2.0))
+    current_parameters = (random.randint(1,100), random.randint(1,100), random.uniform(0.0,2.0), random.randint(1,10))
     while True:
         next_solution = get_max_neighbor(current_parameters)
         if next_solution is None:
@@ -35,8 +34,6 @@ def find_maximum():
             current_parameters = next_solution
         else:
             break
-        iteration += 1
-    print("Iterations:", iteration, "\n")
     return current_parameters
 
 def get_max_neighbor(current_parameters):
@@ -44,13 +41,15 @@ def get_max_neighbor(current_parameters):
     best_parameters = current_parameters
     for i in range(-1, 2):
         for j in range(-1, 2):
-            for k in [-0.0001, 0, 0.0001]:
-                candidate_parameters = (original_parameters[0]+i, original_parameters[1]+j, original_parameters[2]+k)
-                if (1 <= candidate_parameters[0] <= 100 and
-                    1 <= candidate_parameters[1] <= 100 and
-                    0.0 <= candidate_parameters[2] <= 2.0):
-                    if utility(*candidate_parameters) > utility(*best_parameters):
-                        best_parameters = candidate_parameters
+            for k in [-0.001, 0, 0.001]:
+                for l in range(-1, 2):
+                    candidate_parameters = (original_parameters[0]+i, original_parameters[1]+j, original_parameters[2]+k, original_parameters[3]+l)
+                    if (1 <= candidate_parameters[0] <= 100 and
+                        1 <= candidate_parameters[1] <= 100 and
+                        0.0 <= candidate_parameters[2] <= 2.0 and
+                        1 <= candidate_parameters[3] <= 10):
+                        if utility(*candidate_parameters) > utility(*best_parameters):
+                            best_parameters = candidate_parameters
     if best_parameters == original_parameters:
         return None
     return best_parameters
@@ -68,8 +67,17 @@ all_optimums = []
 for k, v in optimums.items():
     all_optimums.append(k)
 
+all_optimums.sort()
+filtered_optimums = []
+prev_num = None
+
+for num in all_optimums:
+    if prev_num is None or abs(num - prev_num) >= 3:
+        filtered_optimums.append(num)
+        prev_num = num
+
 
 print("Optimums with their parameters:")
 print(sorted_optimums)
-print("Optimums:")
-print(sorted(all_optimums))
+print("Optimums when taking into account an error of 3:")
+print(filtered_optimums)

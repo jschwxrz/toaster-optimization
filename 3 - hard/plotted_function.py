@@ -1,3 +1,5 @@
+import numpy as np
+import matplotlib.pyplot as plt
 import math
 
 def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
@@ -23,27 +25,33 @@ def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
 
     return overall_utility
 
-def find_maximum():
-    current_parameters = (0,0)
-    while True:
-        print("one iteration")
-        next_solution = get_max_neighbor(current_parameters)
-        if utility(*next_solution) > utility(*current_parameters):
-            current_parameters = next_solution
-        else:
-            break
-    return current_parameters
+def plot_4d():
+    toast_time = np.arange(0, 101, 1)
+    wait_time = np.arange(0, 101, 1)
+    power = np.arange(0, 2, 0.1)
 
-def get_max_neighbor(current_parameters):
-    original_parameters = current_parameters
-    best_parameters = current_parameters
-    for i in range(-1, 2):
-        for j in range(-1, 2):
-            current_parameters = (original_parameters[0]+i, original_parameters[1]+j)
-            if utility(*current_parameters) > utility(*best_parameters):
-                best_parameters = current_parameters
-    return best_parameters
+    X, Y, Z = np.meshgrid(toast_time, wait_time, power)
 
-optimum = find_maximum()
-print("Optimum:",optimum,)
-print("value:",utility(*optimum))
+    utility_values = np.zeros_like(X, dtype=float)
+    for i in range(X.shape[0]):
+        for j in range(X.shape[1]):
+            for k in range(X.shape[2]):
+                utility_values[i, j, k] = utility(int(X[i, j, k]), int(Y[i, j, k]), Z[i, j, k])
+
+    X_flat = X.flatten()
+    Y_flat = Y.flatten()
+    Z_flat = Z.flatten()
+    utility_flat = utility_values.flatten()
+
+    fig = plt.figure(figsize=(14, 7))
+    ax = fig.add_subplot(111, projection='3d')
+    scatter = ax.scatter(X_flat, Y_flat, Z_flat, c=utility_flat, cmap="viridis")
+
+    ax.set_xlabel('X: Toast Time')
+    ax.set_ylabel('Y: Wait Time')
+    ax.set_zlabel('Z: Power')
+    fig.colorbar(scatter, label='Utility')
+
+    plt.show()
+
+plot_4d()

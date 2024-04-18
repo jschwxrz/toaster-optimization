@@ -71,7 +71,6 @@ def get_gradient(toast_duration, wait_duration, power):
     return toast_duration_gradient, wait_duration_gradient, power_gradient
 
 def main():
-    start_time = time.time()
     for i in range(500):
         optimum = find_maximum(random.randint(1,100), random.randint(1,100), random.uniform(0.1,2.0))
         optimums[optimum] = utility(*optimum)
@@ -81,17 +80,16 @@ def main():
         if v > largest_so_far:
             largest_so_far = v
             parameters = k
-            ranges = range(-25, 1000, 25)
+            ranges = range(0, 1000, 50)
         for index, value in enumerate(ranges):
             if v > value and v < ranges[index+1]:
                 ranges_optimums[ranges[index]] = ranges_optimums.get(value, 0) + 1
     sorted_dict = sorted(ranges_optimums.items())
-    print("Largest optimum found: ", largest_so_far, ", Parameters: ", parameters)
-    print(sorted_dict)
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    print("Operation took {:.5f} seconds".format(elapsed_time))
 
+    print("Largest optimum found: ", largest_so_far, ", Parameters: ", parameters)
+    print("Ranges and number of optimums that fall into each range: ")
+    print(sorted_dict)
+    print("Does not work, since this method is usually used for continous parameters and loses its effectiveness when rounding to integers after calculating the gradient.")
 
 floats = np.arange(0.1, 2.0, 0.1)
 optimums = {}

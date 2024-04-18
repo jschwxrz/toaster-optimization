@@ -71,3 +71,4 @@ def get_gradient(toast_duration, wait_duration, power):
 optimum = find_maximum(random.randint(1,100), random.randint(1,100), random.uniform(0.0,2.0))
 print("Optimum:",optimum)
 print("value:",utility(*optimum))
+print("Does not work, since this method is usually used for continous parameters and loses its effectiveness when rounding to integers after calculating the gradient.")
