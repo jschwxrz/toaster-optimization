@@ -1,18 +1,17 @@
 # ToasterOptimization
 
-Welcome to the ToasterOptimization repository! This repository is the home to a series of optimization challenges, ranging from easy to very hard, all centered on the art of perfecting toaster settings. Our journey is detailed in `toaster_optimization_task.py`.
+Welcome to the ToasterOptimization repository! This repository contains a series of optimization challenges, ranging from easy to prepare to cry, all centered on the art of perfecting toaster settings. The various optimization tasks and the outline are detailed in `toaster_optimization_task.py`.
 
 ## Repository Structure
 
-Each difficulty level of the toaster optimization tasks has its own dedicated folder. Inside these folders, you'll find one or more Python files. These contain:
+Each difficulty level of the toaster optimization tasks has its own dedicated folder. Inside these folders you'll find the files, where the filename indicates the type of algorithm that was used.
 
-- A utility function specifically for that level of difficulty.
-- My implementation of an algorithm designed to maximize the utility function's effectiveness.
+- A utility function.
+- My implementation of an algorithm designed to maximize the utility function.
 
-For the higher levels of difficulty, namely 'hard' and 'very hard', you'll notice multiple Python files. This is because I explored several strategies in my quest for optimization. To share the full extent of my process:
+For the higher levels of difficulty, namely 'hard', 'very hard' and 'prepare to cry', you'll notice multiple Python files. This is because I explored several strategies in my quest for optimization. To share the full extent of my process:
 
 - I included scripts that plot the utility function for a clearer visual understanding.
-- I have also added my attempts at manually calculating the utility function's optimums to verify the accuracy of my algorithm.
 
 ## Running the Code
 
