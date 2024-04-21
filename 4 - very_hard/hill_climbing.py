@@ -25,7 +25,6 @@ def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
     return overall_utility
 
 def find_maximum():
-    iteration = 0
     current_parameters = (random.randint(1,100), random.randint(1,100), random.uniform(0.0,2.0))
     while True:
         next_solution = get_max_neighbor(current_parameters)
@@ -35,8 +34,6 @@ def find_maximum():
             current_parameters = next_solution
         else:
             break
-        iteration += 1
-    #print("Iterations:", iteration, "\n")
     return current_parameters
 
 def get_max_neighbor(current_parameters):
@@ -59,7 +56,7 @@ optimums = {}
 repetitions = 500
 
 for i in range(repetitions):
-    #print(f"{i+1}/{repetitions}")
+    print(f"{i+1}/{repetitions}")
     optimum = find_maximum()
     optimums[int(utility(*optimum))] = optimum
 sorted_optimums = {k: optimums[k] for k in sorted(optimums)}
@@ -69,7 +66,7 @@ for k, v in optimums.items():
     all_optimums.append(k)
 
 
-print("Optimums with their parameters:")
+print("\n","Optimums with their parameters:")
 print(sorted_optimums)
-print("Optimums:")
+print("\n","Optimums:")
 print(sorted(all_optimums))

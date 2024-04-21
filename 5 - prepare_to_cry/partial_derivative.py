@@ -29,17 +29,14 @@ def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
 def find_maximum(toast_duration, wait_duration, power, toaster):
 	
     while True:
-        # get gradient by calculating partial derivatives
         next_parameters = get_gradient(toast_duration, wait_duration, power, toaster)
         
-
         if not 0 < int(next_parameters[0]) <= 100 or not 0 < int(next_parameters[1]) <= 100 or not 0 < next_parameters[2] < 2 or not 0 < next_parameters[3] <= 10:
             break
 
         if abs(utility(int(next_parameters[0]), int(next_parameters[1]), next_parameters[2], int(next_parameters[3])) - utility(int(toast_duration), int(wait_duration), power, int(toaster))) < 1e-6:
             break
 
-        # reassigning values for next run
         toast_duration = int(next_parameters[0])
         wait_duration = int(next_parameters[1])
         power = next_parameters[2]
@@ -48,7 +45,6 @@ def find_maximum(toast_duration, wait_duration, power, toaster):
 
 
 def get_gradient(toast_duration, wait_duration, power, toaster):
-    # handling input errors
     if (not type(toast_duration) is int) or not (1 <= toast_duration <= 100):
         raise ValueError("toast_duration is not an integer")
     if (not type(wait_duration) is int) or not (1 <= wait_duration <= 100):
@@ -97,7 +93,7 @@ for num in all_optimums:
         prev_num = num
 
 
-print("Optimums with their parameters:")
-print(sorted_optimums)
+print("\n","Optimums with their parameters:")
+print(sorted_optimums, "\n")
 print("Optimums when taking into account an error of 3:")
 print(filtered_optimums)

@@ -77,8 +77,8 @@ for num in all_optimums:
         prev_num = num
 
 
-print("Optimums with their parameters:")
+print("\n","Optimums with their parameters:")
 print(sorted_optimums)
-print("Optimums when taking into account an error of 3:")
+print("\n","Optimums when taking into account an error of 3:")
 print(filtered_optimums)
 

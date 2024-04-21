@@ -29,9 +29,7 @@ def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
 def find_maximum(toast_duration, wait_duration, power):
 	
     while True:
-        # get gradient by calculating partial derivatives
         next_parameters = get_gradient(toast_duration, wait_duration, power)
-        
 
         if not 0 < int(next_parameters[0]) <= 100 or not 0 < int(next_parameters[1]) <= 100 or not 0 < next_parameters[2] < 2:
             break
@@ -39,7 +37,6 @@ def find_maximum(toast_duration, wait_duration, power):
         if abs(utility(int(next_parameters[0]), int(next_parameters[1]), next_parameters[2]) - utility(int(toast_duration), int(wait_duration), power)) < 1e-6:
             break
 
-        # reassigning values for next run
         toast_duration = int(next_parameters[0])
         wait_duration = int(next_parameters[1])
         power = next_parameters[2]
@@ -47,7 +44,6 @@ def find_maximum(toast_duration, wait_duration, power):
 
 
 def get_gradient(toast_duration, wait_duration, power):
-    # handling input errors
     if (not type(toast_duration) is int) or not (1 <= toast_duration <= 100):
         raise ValueError("toast_duration is not an integer")
     if (not type(wait_duration) is int) or not (1 <= wait_duration <= 100):
@@ -73,7 +69,7 @@ optimums = {}
 repetitions = 500
 
 for i in range(repetitions):
-    #print(f"{i+1}/{repetitions}")
+    print(f"{i+1}/{repetitions}")
     optimum = find_maximum(random.randint(1,100), random.randint(1,100), random.uniform(0.0,2.0))
     optimums[int(utility(*optimum))] = optimum
 sorted_optimums = {k: optimums[k] for k in sorted(optimums)}
@@ -83,7 +79,7 @@ for k, v in optimums.items():
     all_optimums.append(k)
 
 
-print("Optimums with their parameters:")
+print("\n","Optimums with their parameters:")
 print(sorted_optimums)
-print("Optimums:")
+print("\n","Optimums:")
 print(sorted(all_optimums))
