@@ -26,29 +26,21 @@ def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
 
     return overall_utility
 
-def find_maximum(toast_duration, wait_duration, power):
-    learning_rate = 0.01
-    learning_rate_power = 0.00001
-	
+def find_maximum(toast_duration, wait_duration, power):	
     while True:
         # get gradient by calculating partial derivatives
-        toast_duration_gradient, wait_duration_gradient, power_gradient = get_gradient(toast_duration, wait_duration, power)
+        next_parameters = get_gradient(toast_duration, wait_duration, power)
         
-        # calculating the next points
-        toast_duration_next = toast_duration + learning_rate * toast_duration_gradient
-        wait_duration_next = wait_duration + learning_rate * wait_duration_gradient
-        power_next = power + learning_rate_power * power_gradient
-
-        if not 0 < int(toast_duration_next) <= 100 or not 0 < int(wait_duration_next) <= 100 or not 0 < power_next < 2:
+        if not 0 < int(next_parameters[0]) <= 100 or not 0 < int(next_parameters[1]) <= 100 or not 0 < next_parameters[2] < 2:
             break
 
-        if abs(utility(int(toast_duration_next), int(wait_duration_next), power_next) - utility(int(toast_duration), int(wait_duration), power)) < 1e-6:
+        if abs(utility(int(next_parameters[0]), int(next_parameters[1]), next_parameters[2]) - utility(int(toast_duration), int(wait_duration), power)) < 1e-6:
             break
 
         # reassigning values for next run
-        toast_duration = int(toast_duration_next)
-        wait_duration = int(wait_duration_next)
-        power = power_next
+        toast_duration = int(next_parameters[0])
+        wait_duration = int(next_parameters[1])
+        power = next_parameters[2]
     return int(toast_duration), int(wait_duration), power
 
 
@@ -60,15 +52,21 @@ def get_gradient(toast_duration, wait_duration, power):
         raise ValueError("wait_duration is not an integer")
     if (not type(power) is float) or not (0.0 <= power <= 2.0):
         raise ValueError("power is not a float or not in the valid range")
-
-    # calculating derivatives
-    toast_duration_gradient = (-0.2 * toast_duration + 2) * (math.sin(10 * power + math.pi / 2 - 10) + power * 0.2)
-    wait_duration_gradient = (-0.02 * wait_duration + 0.02) * (math.sin(10 * power + math.pi / 2 - 10) + power * 0.2)
-    power_gradient = ((-0.1 * (toast_duration - 10) ** 2 + 1) + (-0.01 * (wait_duration - 1) ** 2 + 1)) * (10 * math.cos(10 * power + math.pi/2 - 10) + 0.2)
-
-    return toast_duration_gradient, wait_duration_gradient, power_gradient
+    
+    original_parameters = (toast_duration, wait_duration, power)
+    best_parameters = (toast_duration, wait_duration, power)
+    for i in range(-1, 2):
+        for j in range(-1, 2):
+            power_gradient = ((-0.1 * (i - 10) ** 2 + 1) + (-0.01 * (i - 1) ** 2 + 1)) * (10 * math.cos(10 * best_parameters[2] + math.pi/2 - 10) + 0.2)
+            new_power = best_parameters[2] + 0.0001 * power_gradient
+            candidate_parameters = (original_parameters[0]+i, original_parameters[1]+j, new_power)
+            if (1 <= candidate_parameters[0] <= 100 and
+                1 <= candidate_parameters[1] <= 100 and
+                0.0 <= candidate_parameters[2] <= 2.0):
+                if utility(*candidate_parameters) > utility(*best_parameters):
+                    best_parameters = candidate_parameters
+    return best_parameters
 
 optimum = find_maximum(random.randint(1,100), random.randint(1,100), random.uniform(0.0,2.0))
 print("Optimum:",optimum)
 print("value:",utility(*optimum))
-print("Does not work, since this method is usually used for continous parameters and loses its effectiveness when rounding to integers after calculating the gradient.")

@@ -36,7 +36,7 @@ def find_maximum():
         else:
             break
         iteration += 1
-    print("Iterations:", iteration, "\n")
+    #print("Iterations:", iteration, "\n")
     return current_parameters
 
 def get_max_neighbor(current_parameters):
@@ -59,7 +59,7 @@ optimums = {}
 repetitions = 500
 
 for i in range(repetitions):
-    print(f"{i+1}/{repetitions}")
+    #print(f"{i+1}/{repetitions}")
     optimum = find_maximum()
     optimums[int(utility(*optimum))] = optimum
 sorted_optimums = {k: optimums[k] for k in sorted(optimums)}
