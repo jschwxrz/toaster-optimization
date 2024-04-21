@@ -6,14 +6,14 @@ Welcome to the ToasterOptimization repository! This repository contains a series
 
 Each difficulty level of the toaster optimization tasks has its own dedicated folder. The folder contains one or multiple python files where the filename indicates the type of algorithm that was used, as well as my implementation of that algorithm designed to maximize the utility function.
 
-Notice that the folder hard also contains the files `plotted_function.py` and `calculation_partial_derivative.py` with my calculation of the partial derivative of the power parameter.
+Notice that the 'folder' hard also contains the files `plotted_function.py` and `calculation_partial_derivative.txt` with my calculation of the partial derivative of the power parameter.
 
 ## Running the Code
 
 To run any of the optimization files:
 
 1. Open your terminal or command prompt.
-2. Change the directory to the folder of the desired difficulty level using `cd`.
+2. Change the directory to the folder of the desired difficulty level using `cd <foldername>`.
 3. Execute the script with the following command:
 
 `python <filename>.py`

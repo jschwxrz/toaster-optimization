@@ -1,0 +1,30 @@
+To simplify the calculations:
+
+x = toast_duration
+y = wait_duration
+z = power
+
+Function:
+
+f(x,y,z) = ((-0.1 * (x - 10) ** 2 + 1) + (-0.01 * (y - 1) ** 2 + 1)) * (sin(10*z + pi/2 -10) + 0.2*z)
+
+Since only z is a continous parameter, I only use the derivative in respect to z in my algorithm and use hill climbing for the integers x and y.
+
+Derivative in respect to z:
+
+I treat x and y as constants and since they also are factors, they stay the same:
+
+f'(x,y,z)z = ((-0.1 * (x - 10) ** 2 + 1) + (-0.01 * (y - 1) ** 2 + 1)) * (derivative of this part of the equation)
+
+Now we need to take the derivative of the second part of the equation containing the variable z:
+
+h(z) = (sin(10*z + pi/2 -10) + 0.2*z)
+h'(z) = (10 * cos(10 * power + pi/2 - 10) + 0.2)
+
+Now we just need to put both parts together:
+
+f'(x,y,z)z = ((-0.1 * (x - 10) ** 2 + 1) + (-0.01 * (y - 1) ** 2 + 1)) * (10 * cos(10 * power + pi/2 - 10) + 0.2)
+
+Switching back to original variable names:
+
+f'(toast_duration, wait_duration, power)power = ((-0.1 * (toast_duration - 10) ** 2 + 1) + (-0.01 * (wait_duration - 1) ** 2 + 1)) * (10 * cos(10 * power + pi/2 - 10) + 0.2)
