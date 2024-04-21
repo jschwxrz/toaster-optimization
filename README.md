@@ -22,6 +22,6 @@ To run any of the optimization scripts:
 2. Change the directory to the folder of the desired difficulty level using `cd`.
 3. Execute the script with the following command:
 
-python <filename.py>
+`python <filename>.py`
 
 Feel free to delve into the folders, explore the various approaches, and see how the algorithms perform. Happy optimizing!
