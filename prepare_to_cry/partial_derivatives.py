@@ -78,7 +78,7 @@ optimums = {}
 repetitions = 500
 
 for i in range(repetitions):
-    #print(f"{i+1}/{repetitions}")
+    print(f"{i+1}/{repetitions}")
     optimum = find_maximum(random.randint(1,100), random.randint(1,100), random.uniform(0.0,2.0), random.randint(1,10))
     optimums[int(utility(*optimum))] = optimum
 sorted_optimums = {k: optimums[k] for k in sorted(optimums)}
@@ -87,8 +87,17 @@ all_optimums = []
 for k, v in optimums.items():
     all_optimums.append(k)
 
+all_optimums.sort()
+filtered_optimums = []
+prev_num = None
+
+for num in all_optimums:
+    if prev_num is None or abs(num - prev_num) >= 3:
+        filtered_optimums.append(num)
+        prev_num = num
+
 
 print("Optimums with their parameters:")
 print(sorted_optimums)
-print("Optimums:")
-print(sorted(all_optimums))
+print("Optimums when taking into account an error of 3:")
+print(filtered_optimums)

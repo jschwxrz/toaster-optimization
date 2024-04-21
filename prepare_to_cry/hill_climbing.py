@@ -81,3 +81,4 @@ print("Optimums with their parameters:")
 print(sorted_optimums)
 print("Optimums when taking into account an error of 3:")
 print(filtered_optimums)
+
