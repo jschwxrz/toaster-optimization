@@ -54,3 +54,4 @@ value:
 5. prepare to cry: hill climbing + gradient ascent + repeated search
 
    - Executes a comprehensive search to determine all optima, while exclusively returning the supreme global optimum.
+   - not optimal algorithm to solve this problem! A genetic algorithm would be more suited in this case!
