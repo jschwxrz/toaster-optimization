@@ -86,21 +86,15 @@ def get_gradient(toast_duration, wait_duration, power, toaster):
     return best_parameters
 
 optimums = {}
-repetitions = 500
+repetitions = 200
+largest_optimum = 0
+best_parameters = None
 
 for i in range(repetitions):
     print(f"{i+1}/{repetitions}")
     optimum = find_maximum(random.randint(1,100), random.randint(1,100), random.uniform(0.0,2.0), random.randint(1,10))
-    optimums[int(utility(*optimum))] = optimum
-sorted_optimums = {k: optimums[k] for k in sorted(optimums)}
+    if utility(*optimum) > largest_optimum:
+        largest_optimum = utility(*optimum)
+        best_parameters = optimum
 
-filtered_optimums = {}
-prev_num = None
-
-for k, v in sorted_optimums.items():
-    if prev_num is None or abs(k - prev_num) >= 3:
-        filtered_optimums[k] = v
-        prev_num = k
-
-for i, v in filtered_optimums.items():
-    print(f"Optimum: {v}, \nvalue: {i}") 
+print(f"Optimum: {best_parameters} \nvalue: {largest_optimum}")

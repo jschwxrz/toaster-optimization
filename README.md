@@ -1,6 +1,6 @@
-# ToasterOptimization
+# Toaster Optimization
 
-Welcome to the ToasterOptimization repository! This repository contains a series of optimization challenges, ranging from easy to prepare to cry, all centered on the art of perfecting toaster settings. The various optimization tasks and the project outline are detailed in `toaster_optimization_task.py`.
+Welcome to the Toaster Optimization repository! This repository contains a series of optimization challenges, ranging from 'easy' to 'prepare to cry', all centered on the art of perfecting toaster settings. The various optimization tasks and the project outline are detailed in `toaster_optimization_task.py`.
 
 ## Repository Structure
 
@@ -28,7 +28,29 @@ To run any of the optimization files:
 
 `python <filename>.py`
 
-The output will hve following structure:
+The output will have following structure:
 
 Optimum: ()
 value:
+
+## Algorithms
+
+1. easy: brute force
+
+   - Systematically examines every single possibility within the state space to identify optimum.
+
+2. medium: hill climbing
+
+   - Evaluates the utility of all adjacent parameters and selects the most advantageous one.
+
+3. hard: hill climbing + gradient ascent
+
+   - Integrates hill climbing for discrete parameters with gradient ascent to optimize continuous parameters.
+
+4. very hard: hill climbing + gradient ascent + repeated search
+
+   - Employs the strategy from 'hard' with an added repeated search to locate all optima.
+
+5. prepare to cry: hill climbing + gradient ascent + repeated search
+
+   - Executes a comprehensive search to determine all optima, while exclusively returning the supreme global optimum.

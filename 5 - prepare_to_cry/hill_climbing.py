@@ -41,7 +41,7 @@ def get_max_neighbor(current_parameters):
     best_parameters = current_parameters
     for i in range(-1, 2):
         for j in range(-1, 2):
-            for k in [-0.001, 0, 0.001]:
+            for k in [-0.01, 0, 0.01]:
                 for l in range(-1, 2):
                     candidate_parameters = (original_parameters[0]+i, original_parameters[1]+j, original_parameters[2]+k, original_parameters[3]+l)
                     if (1 <= candidate_parameters[0] <= 100 and
@@ -55,22 +55,18 @@ def get_max_neighbor(current_parameters):
     return best_parameters
 
 optimums = {}
-repetitions = 500
+repetitions = 100
+largest_optimum = 0
+best_parameters = None
 
 for i in range(repetitions):
     print(f"{i+1}/{repetitions}")
     optimum = find_maximum()
-    optimums[int(utility(*optimum))] = optimum
-sorted_optimums = {k: optimums[k] for k in sorted(optimums)}
+    if utility(*optimum) > largest_optimum:
+        largest_optimum = utility(*optimum)
+        best_parameters = optimum
 
-filtered_optimums = {}
-prev_num = None
+print(f"Optimum: {best_parameters} \nvalue: {largest_optimum}") 
+    
 
-for k, v in sorted_optimums.items():
-    if prev_num is None or abs(k - prev_num) >= 3:
-        filtered_optimums[k] = v
-        prev_num = k
-
-for i, v in filtered_optimums.items():
-    print(f"Optimum: {v}, \nvalue: {i}") 
 

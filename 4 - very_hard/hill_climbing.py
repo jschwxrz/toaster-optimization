@@ -62,4 +62,4 @@ for i in range(repetitions):
 sorted_optimums = {k: optimums[k] for k in sorted(optimums)}
 
 for i, v in sorted_optimums.items():
-    print(f"Optimum: {v}, \nvalue: {i}") 
+    print(f"Optimum: {v} \nvalue: {i}") 
