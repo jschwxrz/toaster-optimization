@@ -94,21 +94,13 @@ for i in range(repetitions):
     optimums[int(utility(*optimum))] = optimum
 sorted_optimums = {k: optimums[k] for k in sorted(optimums)}
 
-all_optimums = []
-for k, v in optimums.items():
-    all_optimums.append(k)
-
-all_optimums.sort()
-filtered_optimums = []
+filtered_optimums = {}
 prev_num = None
 
-for num in all_optimums:
-    if prev_num is None or abs(num - prev_num) >= 3:
-        filtered_optimums.append(num)
-        prev_num = num
+for k, v in sorted_optimums.items():
+    if prev_num is None or abs(k - prev_num) >= 3:
+        filtered_optimums[k] = v
+        prev_num = k
 
-
-print("\n","Optimums with their parameters:")
-print(sorted_optimums, "\n")
-print("Optimums when taking into account an error of 3:")
-print(filtered_optimums)
+for i, v in filtered_optimums.items():
+    print(f"Optimum: {v}, \nvalue: {i}") 

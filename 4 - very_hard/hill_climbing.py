@@ -41,7 +41,7 @@ def get_max_neighbor(current_parameters):
     best_parameters = current_parameters
     for i in range(-1, 2):
         for j in range(-1, 2):
-            for k in [-0.0001, 0, 0.0001]:
+            for k in [-0.001, 0, 0.001]:
                 candidate_parameters = (original_parameters[0]+i, original_parameters[1]+j, original_parameters[2]+k)
                 if (1 <= candidate_parameters[0] <= 100 and
                     1 <= candidate_parameters[1] <= 100 and
@@ -61,12 +61,5 @@ for i in range(repetitions):
     optimums[int(utility(*optimum))] = optimum
 sorted_optimums = {k: optimums[k] for k in sorted(optimums)}
 
-all_optimums = []
-for k, v in optimums.items():
-    all_optimums.append(k)
-
-
-print("\n","Optimums with their parameters:")
-print(sorted_optimums)
-print("\n","Optimums:")
-print(sorted(all_optimums))
+for i, v in sorted_optimums.items():
+    print(f"Optimum: {v}, \nvalue: {i}") 

@@ -28,4 +28,6 @@ To run any of the optimization files:
 
 `python <filename>.py`
 
+It will output the optimums and its parameters.
+
 Feel free to delve into the folders, explore the various approaches, and see how the algorithms perform. Happy optimizing!

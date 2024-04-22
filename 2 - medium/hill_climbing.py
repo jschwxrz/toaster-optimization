@@ -26,7 +26,6 @@ def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
 def find_maximum():
     current_parameters = (0,0)
     while True:
-        print("one iteration")
         next_solution = get_max_neighbor(current_parameters)
         if utility(*next_solution) > utility(*current_parameters):
             current_parameters = next_solution

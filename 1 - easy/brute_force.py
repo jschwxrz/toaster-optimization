@@ -1,13 +1,13 @@
 import math
 
 def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
-    if (not type(toast_duration) is int) or not (1 <= toast_duration <= 100):
+    if (not type(toast_duration) is int) and not (1 <= toast_duration <= 100):
         raise ValueError("toast_duration is not an integer")
-    if (not type(wait_duration) is int) or not (1 <= wait_duration <= 100):
+    if (not type(wait_duration) is int) and not (1 <= wait_duration <= 100):
         raise ValueError("wait_duration is not an integer")
-    if (not type(toaster) is int) or not (1 <= toaster <= 10):
+    if (not type(toaster) is int) and not (1 <= toaster <= 10):
         raise ValueError("toaster is not an integer or is not in a valid range")
-    if (not type(power) is float) or not (0.0 <= power <= 2.0):
+    if (not type(power) is float) and not (0.0 <= power <= 2.0):
         raise ValueError("power is not a float or not in the valid range")
 
     hpt = [10,8,15,7,9,2,9,19,92,32][toaster-1]

@@ -56,7 +56,7 @@ def get_gradient(toast_duration, wait_duration, power):
     for i in [-1, 0, 1]:
         for j in [-1, 0, 1]:
             power_gradient = ((-0.1 * (original_parameters[0]+i - 10) ** 2 + 1) + (-0.01 * (original_parameters[1]+j - 1) ** 2 + 1)) * (10 * math.cos(10 * original_parameters[2] + math.pi/2 - 10) + 0.2)
-            new_power = original_parameters[2] + 0.000001 * power_gradient
+            new_power = original_parameters[2] + 0.00001 * power_gradient
             candidate_parameters = (original_parameters[0]+i, original_parameters[1]+j, new_power)
             if (1 <= candidate_parameters[0] <= 100 and
                 1 <= candidate_parameters[1] <= 100 and
@@ -66,7 +66,7 @@ def get_gradient(toast_duration, wait_duration, power):
     return best_parameters
 
 optimums = {}
-repetitions = 100
+repetitions = 500
 
 for i in range(repetitions):
     print(f"{i+1}/{repetitions}")
@@ -74,12 +74,5 @@ for i in range(repetitions):
     optimums[int(utility(*optimum))] = optimum
 sorted_optimums = {k: optimums[k] for k in sorted(optimums)}
 
-all_optimums = []
-for k, v in optimums.items():
-    all_optimums.append(k)
-
-
-print("\n","Optimums with their parameters:")
-print(sorted_optimums)
-print("\n","Optimums:")
-print(sorted(all_optimums))
+for i, v in sorted_optimums.items():
+    print(f"Optimum: {v}, \nvalue: {i}") 
