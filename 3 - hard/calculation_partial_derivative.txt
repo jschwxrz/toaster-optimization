@@ -1,3 +1,4 @@
+##### For hard level #####
 To simplify the calculations:
 
 x = toast_duration
@@ -28,3 +29,9 @@ f'(x,y,z)z = ((-0.1 * (x - 10) ** 2 + 1) + (-0.01 * (y - 1) ** 2 + 1)) * (10 * c
 Switching back to original variable names:
 
 f'(toast_duration, wait_duration, power)power = ((-0.1 * (toast_duration - 10) ** 2 + 1) + (-0.01 * (wait_duration - 1) ** 2 + 1)) * (10 * cos(10 * power + pi/2 - 10) + 0.2)
+
+##### For prepare to cry level #####
+
+taking into account hpt, hpw and toaster_utility (used integers in the hard level since those parameters were constants)
+
+f'(toast_duration, wait_duration, power)power = (((-0.1 * (toast_duration - hpt) ** 2 + 1) + (-0.01 * (wait_duration - hpt) ** 2 + 1))*toaster_utility) * (10 * cos(10 * power + pi/2 - 10) + 0.2)

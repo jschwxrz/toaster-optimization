@@ -6,7 +6,10 @@ Welcome to the ToasterOptimization repository! This repository contains a series
 
 Each difficulty level of the toaster optimization tasks has its own dedicated folder. The folder contains one or multiple python files where the filename indicates the type of algorithm that was used, as well as my implementation of that algorithm designed to maximize the utility function.
 
-Notice that the 'folder' hard also contains the files `plotted_function.py` and `calculation_partial_derivative.txt` with my calculation of the partial derivative of the power parameter.
+Notice that the 'folder' hard also contains following files.
+
+- `plotted_function.py` (plot of the utility function)
+- `calculation_partial_derivative.txt` (calculation of the partial derivative in respect to the power parameter)
 
 ## Running the Code
 

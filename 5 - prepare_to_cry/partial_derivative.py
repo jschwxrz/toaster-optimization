@@ -26,6 +26,20 @@ def utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
 
     return overall_utility
 
+def derivative_utility(toast_duration, wait_duration, power = 1.0,toaster = 1):
+    hpt = [10,8,15,7,9,2,9,19,92,32][toaster-1]
+    hpw = [1,4,19,3,20,3,1,4,1,62][toaster-1]
+    toaster_utility = [1,0.9,0.7,1.3,0.3,0.8,0.5,0.8,3,0.2][toaster-1]
+
+    toast_utility = -0.1*(toast_duration-hpt)**2+1
+    wait_utility = -0.01*(wait_duration-hpw)**2+1
+    overall_utility = (toast_utility + wait_utility) * toaster_utility
+
+    power_factor = 10*math.cos(10*power+math.pi/2 -10) + 0.2
+    overall_utility *= power_factor
+
+    return overall_utility
+
 def find_maximum(toast_duration, wait_duration, power, toaster):
 	
     while True:
@@ -59,7 +73,8 @@ def get_gradient(toast_duration, wait_duration, power, toaster):
     for i in range(-1, 2):
         for j in range(-1, 2):
             for k in range(-1, 2):
-                power_gradient = ((-0.1 * (i - 10) ** 2 + 1) + (-0.01 * (i - 1) ** 2 + 1)) * (10 * math.cos(10 * best_parameters[2] + math.pi/2 - 10) + 0.2)
+                power_gradient = derivative_utility(i,j,original_parameters[2],k)
+                test = ((-0.1 * (i - 10) ** 2 + 1) + (-0.01 * (i - 1) ** 2 + 1)) * (10 * math.cos(10 * best_parameters[2] + math.pi/2 - 10) + 0.2)
                 new_power = best_parameters[2] + 0.0001 * power_gradient
                 candidate_parameters = (original_parameters[0]+i, original_parameters[1]+j, new_power, original_parameters[3]+k)
                 if (1 <= candidate_parameters[0] <= 100 and
@@ -67,7 +82,7 @@ def get_gradient(toast_duration, wait_duration, power, toaster):
                     0.0 <= candidate_parameters[2] <= 2.0 and
                     1 <= candidate_parameters[3] <= 10):
                     if utility(*candidate_parameters) > utility(*best_parameters):
-                        best_parameters = candidate_parameters
+                       best_parameters = candidate_parameters
     return best_parameters
 
 optimums = {}
