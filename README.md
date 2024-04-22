@@ -11,6 +11,13 @@ Notice that the folder 'hard' also contains following files:
 - `plotted_function.py` (plot of the utility function)
 - `calculation_partial_derivative.txt` (calculation of the partial derivative in respect to the power parameter)
 
+## Prerequisites
+
+Following libraries are required:
+
+- mathplotlib
+- numpy
+
 ## Running the Code
 
 To run any of the optimization files:
