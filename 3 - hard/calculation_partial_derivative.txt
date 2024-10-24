@@ -9,7 +9,7 @@ Function:
 
 f(x,y,z) = ((-0.1 * (x - 10) ** 2 + 1) + (-0.01 * (y - 1) ** 2 + 1)) * (sin(10*z + pi/2 -10) + 0.2*z)
 
-Since only z is a continous parameter, I only use the derivative in respect to z in my algorithm and use hill climbing for the integers x and y.
+Since only z is a continous parameter, I only use the derivative in respect to z in my algorithm and use hill climbing for the discrete parameters x and y.
 
 Derivative in respect to z:
 
